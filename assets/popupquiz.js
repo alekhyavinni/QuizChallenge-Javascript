@@ -1,10 +1,18 @@
+var headinEle = document.querySelectorAll("h3");
+var timeEl = document.querySelector('.time');
 var questions= document.querySelector("#question");
 var ans1 =document.querySelector('#option1');
 var ans2 =document.querySelector('#option2');
 var ans3 =document.querySelector('#option3');
+var ans=document.querySelectorAll('button');
 var count=0;
 var timeLeft = 60;
 
+setTime();
+popquiz();
+for(var index=0;index<headinEle.length;index++){
+    headinEle[index].setAttribute("style","font-size:30px;color:blue");
+}
 
     
        
@@ -43,19 +51,21 @@ function setTime(){
     },1000);
   
 }
-setTime();
+
 
 function popquiz(){
- /* var  answers= {
-      a: "Douglas Crockford",
-      b: "Sheryl Sandberg",
-      c: "Brendan Eich"
-    }*/
+  var  answers= [
+    
+     " a: Douglas Crockford",
+      "b: Sheryl Sandberg",
+      "c: Brendan Eich"
+  ]
 questions.textContent= "Who invented JavaScript?";
-option1.innerText="a: Douglas Crockford";
-option2.innerText="b: Sheryl Sandberg";
-option3.innerText="c: Brendan Eich";
-
-
+for(var i=0;i<answers.length;i++){
+    ans[i].innerText=answers[i];
+}
+if(ans2){
+    count++;
+}
 
 }
