@@ -6,7 +6,15 @@
     font-size: 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-  
+  .header h3{
+    display: inline-block;
+  }
+
+  .header div{
+    padding-top: 15px;
+    margin-right: 20px;
+    float: right;
+  }
   .container {
     display: block;
     margin: 80px auto;
@@ -19,6 +27,11 @@
     padding-top: 20px;
   }
   
+button{
+  background-color:blueviolet;
+  color: white;
+}
+
 
 
 
