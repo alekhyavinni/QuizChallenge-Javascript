@@ -53,20 +53,23 @@ function setTime(){
 
 
 function getquestion(){
-    if(questionindex > 2){
+    if(questionindex >= 3){
         getresults();
     }
+    else{
     questions.textContent=answers[questionindex].question;
     ans1.innerText=answers[questionindex].options[0];
     ans2.innerText=answers[questionindex].options[1];
     ans3.innerText=answers[questionindex].options[2];
     Anschecking();
+    }
 }
 
 function Anschecking(){
 for(var index=0;index<3;index++){
-ans[index].addEventListener("click", function() {
-    var clickedvalue =this.value;
+ans[index].addEventListener("click", function(event) {
+    event.preventDefault();
+    var clickedvalue =this.innerHTML;
     if (answers[questionindex].answer===clickedvalue) {
         result.textContent="Right answer";
         count++;
@@ -94,7 +97,7 @@ function getresults(){
     var countvalue = localStorage.getItem("count");
     score.textContent="your score is:"+countvalue;
  
-    var text =documnet.createElement('label');
+    var text =document.createElement('label');
     text.textContent="Enter your Initials";
 
     var IN = document.createElement("input");
