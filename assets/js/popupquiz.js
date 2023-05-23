@@ -8,6 +8,11 @@ var ans3 =document.querySelector('#option3');
 var ans=document.querySelectorAll("button");
 var result=document.querySelector("#result");
 var form=document.querySelector("#quizform");
+var score;
+var countvalue;
+var text;
+var IN;
+var s;
 
 
 var count=0;
@@ -51,22 +56,25 @@ function setTime(){
   
 }
 
-
+getquestion();
 function getquestion(){
-    if(questionindex > 2){
+    if(questionindex >= 3){
         getresults();
     }
+    else{
     questions.textContent=answers[questionindex].question;
     ans1.innerText=answers[questionindex].options[0];
     ans2.innerText=answers[questionindex].options[1];
     ans3.innerText=answers[questionindex].options[2];
     Anschecking();
+    }
 }
 
 function Anschecking(){
 for(var index=0;index<3;index++){
-ans[index].addEventListener("click", function() {
-    var clickedvalue =this.value;
+ans[index].addEventListener("click", function(event) {
+    event.preventDefault();
+    var clickedvalue =this.innerText;
     if (answers[questionindex].answer===clickedvalue) {
         result.textContent="Right answer";
         count++;
@@ -75,7 +83,7 @@ ans[index].addEventListener("click", function() {
         getquestion();
 
     } else {
-     timeLeft=timeLeft-10;
+        timeLeft=timeLeft-10;
         result.textContent="wrong answer";
         questionindex++;
         getquestion();
@@ -90,30 +98,38 @@ function getresults(){
     
     questions.textContent="Well Done!";
 
-    var score=document.createElement('p');
-    var countvalue = localStorage.getItem("count");
+    score=document.createElement('p');
+    countvalue = localStorage.getItem("count");
     score.textContent="your score is:"+countvalue;
  
-    var text =documnet.createElement('label');
+    text =document.createElement('label');
     text.textContent="Enter your Initials";
 
-    var IN = document.createElement("input");
+    IN = document.createElement("input");
     IN.setAttribute("type", "text");
     IN.setAttribute("name", "Initials");
+    localStorage.setItem("INname",JSON.stringify(IN));
 
-    var s = document.createElement("button");
+    s = document.createElement("button");
     s.setAttribute("type", "submit");
     s.setAttribute("value", "Submit");
+    s.innerText="submit";
 
 
     questions.appendChild(score);
-    form.parentNode.replaceChild(text, ans1);
-    form.parentNode.replaceChild(IN,ans2);
-  
-    s.innerHTML = ans3.innerHTML ;
-    form.parentNode.replaceChild(s, ans3);
+    ans1.parentNode.replaceChild(text, ans1);
+    ans2.parentNode.replaceChild(IN,ans2);
+    ans3.parentNode.replaceChild(s, ans3);
+    
+ 
+    s.addEventListener('click',function highscore(){
+        window.location.href="highscore.html";
+    });
 
 }
 
+
+
+
 setTime();
-getquestion();
+
