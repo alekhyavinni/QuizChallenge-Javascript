@@ -1,14 +1,19 @@
 var headinEle = document.querySelectorAll("h3");
 var timeEl = document.querySelector('.time');
+var divTag =document.querySelector("#que");
 var questions= document.querySelector("#question");
 var ans1 =document.querySelector('#option1');
 var ans2 =document.querySelector('#option2');
 var ans3 =document.querySelector('#option3');
 var ans=document.querySelectorAll("button");
 var result=document.querySelector("#result");
+var form=document.querySelector("#quizform");
+
+
 var count=0;
 var timeLeft = 60;
 var questionindex = 0;
+
 var  answers= [
     {
     question:"Who invented JavaScript?",
@@ -48,6 +53,9 @@ function setTime(){
 
 
 function getquestion(){
+    if(questionindex > 2){
+        getresults();
+    }
     questions.textContent=answers[questionindex].question;
     ans1.innerText=answers[questionindex].options[0];
     ans2.innerText=answers[questionindex].options[1];
@@ -62,6 +70,7 @@ ans[index].addEventListener("click", function() {
     if (answers[questionindex].answer===clickedvalue) {
         result.textContent="Right answer";
         count++;
+        localStorage.setItem("count", count);
         questionindex++;
         getquestion();
 
@@ -75,6 +84,35 @@ ans[index].addEventListener("click", function() {
 });
 
 }
+}
+
+function getresults(){
+    
+    questions.textContent="Well Done!";
+
+    var score=document.createElement('p');
+    var countvalue = localStorage.getItem("count");
+    score.textContent="your score is:"+countvalue;
+ 
+    var text =documnet.createElement('label');
+    text.textContent="Enter your Initials";
+
+    var IN = document.createElement("input");
+    IN.setAttribute("type", "text");
+    IN.setAttribute("name", "Initials");
+
+    var s = document.createElement("button");
+    s.setAttribute("type", "submit");
+    s.setAttribute("value", "Submit");
+
+
+    questions.appendChild(score);
+    form.parentNode.replaceChild(text, ans1);
+    form.parentNode.replaceChild(IN,ans2);
+  
+    s.innerHTML = ans3.innerHTML ;
+    form.parentNode.replaceChild(s, ans3);
+
 }
 
 setTime();
