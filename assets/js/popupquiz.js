@@ -122,9 +122,7 @@ function getresults(){
     ans2.parentNode.replaceChild(IN,ans2);
     ans3.parentNode.replaceChild(s, ans3);
     
-   s.addEventListener('click',function(){
-    getscore();
-   }); 
+   s.addEventListener('click',getscore); 
 }
 
 
