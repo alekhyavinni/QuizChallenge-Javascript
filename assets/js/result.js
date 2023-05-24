@@ -2,7 +2,7 @@ var highscore=document.querySelector("#heading");
 var heading=document.querySelector("#score");
 var reset = document.querySelector("#goback");
 var clearbutton = document.querySelector("#clearscore");
-
+getscore();
 function getscore(){
 highscore.textContent="HIGHSCORE!";
 var playername=localStorage.getItem("INname");

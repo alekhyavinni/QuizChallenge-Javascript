@@ -1,13 +1,13 @@
-var headinEle = document.querySelectorAll("h3");
-var timeEl = document.querySelector('.time');
-var divTag =document.querySelector("#que");
-var questions= document.querySelector("#question");
-var ans1 =document.querySelector('#option1');
-var ans2 =document.querySelector('#option2');
-var ans3 =document.querySelector('#option3');
-var ans=document.querySelectorAll("button");
-var result=document.querySelector("#result");
-var form=document.querySelector("#quizform");
+var headinEle   = document.querySelectorAll("h3");
+var timeEl      = document.querySelector('.time');
+var divTag      = document.querySelector("#que");
+var questions   = document.querySelector("#question");
+var ans1        = document.querySelector('#option1');
+var ans2        = document.querySelector('#option2');
+var ans3        = document.querySelector('#option3');
+var ans         = document.querySelectorAll("button");
+var result      = document.querySelector("#result");
+var form        = document.querySelector("#quizform");
 var score;
 var countvalue;
 var text;
@@ -57,8 +57,9 @@ function setTime(){
 }
 
 getquestion();
+Anschecking();
 function getquestion(){
-    if(questionindex >= 3){
+    if(questionindex >=3){
         getresults();
     }
     else{
@@ -66,7 +67,7 @@ function getquestion(){
     ans1.innerText=answers[questionindex].options[0];
     ans2.innerText=answers[questionindex].options[1];
     ans3.innerText=answers[questionindex].options[2];
-    Anschecking();
+   
     }
 }
 
@@ -95,8 +96,8 @@ ans[index].addEventListener("click", function(event) {
 }
 
 function getresults(){
-    
-    questions.textContent="Well Done!";
+    var done = document.createElement("h2");
+    done.textContent="Well Done!";
 
     score=document.createElement('p');
     countvalue = localStorage.getItem("count");
@@ -115,20 +116,48 @@ function getresults(){
     s.setAttribute("value", "Submit");
     s.innerText="submit";
 
-
-    questions.appendChild(score);
+    questions.parentNode.replaceChild(done,questions);
+    done.appendChild(score);
     ans1.parentNode.replaceChild(text, ans1);
     ans2.parentNode.replaceChild(IN,ans2);
     ans3.parentNode.replaceChild(s, ans3);
     
- 
-    s.addEventListener('click',function highscore(){
-        window.location.href="highscore.html";
-    });
-
+   s.addEventListener('click',function(){
+    getscore();
+   }); 
 }
 
 
+function getscore(){
+
+    var highscore =document.createElement("h1");
+    highscore.textContent="HIGHSCORE!";
+
+    var playername=localStorage.getItem("INname");
+    var player = document.createElement(h3);
+    player.textContent=(JSON.parse(playername).IN) + countvalue;
+    
+    var goback =document.createElement("button");
+    goback.setAttribute("type", "submit");
+    goback.innerText="Go back";
+
+    var reset = document.createElement("button");
+    ans2.innerText ="clear Highscores";
+    
+    
+    questions.parentNode.replaceChild(highscore, questions); 
+    highscore.appendChild(player);
+    //s.parentNode.replaceChild(score, ans3);
+    text.parentNode.replaceChild(goback, text);
+    IN.parentNode.replaceChild(reset,IN);
+    
+    
+    
+    reset.addEventListener('click',function(){
+        getquestion();
+    });
+    
+    }
 
 
 setTime();
