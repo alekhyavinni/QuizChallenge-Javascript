@@ -155,7 +155,7 @@ function getscore(){
     highscore.appendChild(player);
     s.parentNode.replaceChild(clear,s);
     text.parentNode.replaceChild(goback, text);
-    IN.parentNode.replaceChild(reset,IN);
+    Initial.parentNode.replaceChild(reset,Initial);
     
     
     
