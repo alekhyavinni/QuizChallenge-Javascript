@@ -11,7 +11,7 @@ var form        = document.querySelector("#quizform");
 var score;
 var countvalue;
 var text;
-var IN;
+var Initial;
 var s;
 var done;
 var name1;
@@ -108,10 +108,10 @@ function getresults(){
     text =document.createElement('label');
     text.textContent="Enter your Initials";
 
-    IN = document.createElement("input");
-    IN.setAttribute("type", "text");
-    IN.setAttribute("name", "Initials");
-    localStorage.setItem("INname",IN);
+    Initial = document.createElement("input");
+    Initial.setAttribute("type", "text");
+    Initial.setAttribute("name", "Initials");
+    localStorage.setItem("Initial",Initial);
 
     s = document.createElement("button");
     s.setAttribute("type", "button");
@@ -121,7 +121,7 @@ function getresults(){
     questions.parentNode.replaceChild(done,questions);
     done.appendChild(score);
     ans1.parentNode.replaceChild(text, ans1);
-    ans2.parentNode.replaceChild(IN,ans2);
+    ans2.parentNode.replaceChild(Initial,ans2);
     ans3.parentNode.replaceChild(s, ans3);
     
    s.addEventListener('click',getscore); 
@@ -137,7 +137,7 @@ function getscore(){
     result.textContent=" ";
     var player = document.createElement("h3");
     countvalue = localStorage.getItem("count");
-    var playername=localStorage.getItem("INname");
+    var playername=localStorage.getItem("Initial");
     player.textContent=playername + "---"+countvalue;
     
     var goback =document.createElement("button");
