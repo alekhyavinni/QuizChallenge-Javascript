@@ -25,7 +25,7 @@ https://github.com/alekhyavinni/QuizChallenge-Javascript
 https://alekhyavinni.github.io/QuizChallenge-Javascript
 
 # Screenshots
-https://github.com/alekhyavinni/QuizChallenge-Javascript/blob/main/Assets/screenshots
+https://github.com/alekhyavinni/QuizChallenge-Javascript/tree/main/assets/screenshots
 
 # license
 Please refer to the License in repo
