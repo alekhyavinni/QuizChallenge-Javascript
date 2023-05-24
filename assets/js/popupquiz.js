@@ -13,6 +13,8 @@ var countvalue;
 var text;
 var IN;
 var s;
+var done;
+var name1;
 
 
 var count=0;
@@ -96,7 +98,7 @@ ans[index].addEventListener("click", function(event) {
 }
 
 function getresults(){
-    var done = document.createElement("h2");
+    done = document.createElement("h2");
     done.textContent="Well Done!";
 
     score=document.createElement('p');
@@ -109,10 +111,10 @@ function getresults(){
     IN = document.createElement("input");
     IN.setAttribute("type", "text");
     IN.setAttribute("name", "Initials");
-    localStorage.setItem("INname",JSON.stringify(IN));
+    localStorage.setItem("INname",IN);
 
     s = document.createElement("button");
-    s.setAttribute("type", "submit");
+    s.setAttribute("type", "button");
     s.setAttribute("value", "Submit");
     s.innerText="submit";
 
@@ -131,21 +133,27 @@ function getscore(){
     var highscore =document.createElement("h1");
     highscore.textContent="HIGHSCORE!";
 
+    
+    result.textContent=" ";
+    var player = document.createElement("h3");
+    countvalue = localStorage.getItem("count");
     var playername=localStorage.getItem("INname");
-    var player = document.createElement(h3);
-    player.textContent=(JSON.parse(playername).IN) + countvalue;
+    player.textContent=playername + "---"+countvalue;
     
     var goback =document.createElement("button");
     goback.setAttribute("type", "submit");
     goback.innerText="Go back";
 
     var reset = document.createElement("button");
-    ans2.innerText ="clear Highscores";
+    goback.setAttribute("type", "submit");
+    reset.innerText ="clear Highscores";
     
-    
-    questions.parentNode.replaceChild(highscore, questions); 
+    var clear=document.createElement("p");
+    clear.textContent=" ";
+
+    done.parentNode.replaceChild(highscore,done); 
     highscore.appendChild(player);
-    //s.parentNode.replaceChild(score, ans3);
+    s.parentNode.replaceChild(clear,s);
     text.parentNode.replaceChild(goback, text);
     IN.parentNode.replaceChild(reset,IN);
     
