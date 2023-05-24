@@ -8,16 +8,10 @@ var ans3        = document.querySelector('#option3');
 var ans         = document.querySelectorAll("button");
 var result      = document.querySelector("#result");
 var form        = document.querySelector("#quizform");
-var score;
-var countvalue;
-var text;
-var Initial;
-var s;
-var done;
-var name1;
+var header      = document.querySelector(".header");
+var score , countvalue ,text , Initial , s , done;
 
-
-var count=0;
+var count= 0;
 var timeLeft = 60;
 var questionindex = 0;
 
@@ -44,14 +38,16 @@ for(var index=0;index<headinEle.length;index++){
     headinEle[index].setAttribute("style","font-size:30px;color:blue");
 }
 
+//settime function to display the time
 function setTime(){
     var TimeInt = setInterval(function(){
         timeLeft--;
         timeEl.textContent="Time :" + timeLeft;
 
-        if(timeLeft===0){
-            alert("timeup");
-            clearInterval(TimeInt);
+    if(timeLeft===0){
+        alert("timeup");
+        clearInterval(TimeInt);
+        window.location.href="index.html";
             
         }
     },1000);
@@ -73,6 +69,7 @@ function getquestion(){
     }
 }
 
+//Anschecking function checks whether the answer is right or wrong and scores accordingly
 function Anschecking(){
 for(var index=0;index<3;index++){
 ans[index].addEventListener("click", function(event) {
@@ -80,23 +77,25 @@ ans[index].addEventListener("click", function(event) {
     var clickedvalue =this.innerText;
     if (answers[questionindex].answer===clickedvalue) {
         result.textContent="Right answer";
-        count++;
+        count = count + 10;
         localStorage.setItem("count", count);
         questionindex++;
         getquestion();
 
     } else {
         timeLeft=timeLeft-10;
+        localStorage.setItem("count", count);
         result.textContent="wrong answer";
         questionindex++;
         getquestion();
     }
-   
+    
 });
 
 }
 }
 
+//get results function displays the final score count and asks to enter name 
 function getresults(){
     done = document.createElement("h2");
     done.textContent="Well Done!";
@@ -109,10 +108,10 @@ function getresults(){
     text.textContent="Enter your Initials";
 
     Initial = document.createElement("input");
+    Initial.setAttribute('id', 'username')
     Initial.setAttribute("type", "text");
     Initial.setAttribute("name", "Initials");
-    localStorage.setItem("Initial",Initial);
-
+    
     s = document.createElement("button");
     s.setAttribute("type", "button");
     s.setAttribute("value", "Submit");
@@ -124,18 +123,27 @@ function getresults(){
     ans2.parentNode.replaceChild(Initial,ans2);
     ans3.parentNode.replaceChild(s, ans3);
     
-   s.addEventListener('click',getscore); 
+   s.addEventListener('click',storeValue); 
 }
 
+//storevalue function is created to retrive the input value from the text area
+function storeValue() {
+    let value = document.getElementById('username')
+    console.log(value.value)
+    localStorage.setItem("Initial", value.value);
 
+    getscore();
+}
+
+//getscore function displays the initial and score retriving from the local storage
 function getscore(){
 
-    var highscore =document.createElement("h1");
+    var highscore =document.createElement("h2");
     highscore.textContent="HIGHSCORE!";
 
-    
     result.textContent=" ";
-    var player = document.createElement("h3");
+    var player = document.createElement("h5");
+    player.setAttribute("id","play");
     countvalue = localStorage.getItem("count");
     var playername=localStorage.getItem("Initial");
     player.textContent=playername + "---"+countvalue;
@@ -156,8 +164,6 @@ function getscore(){
     s.parentNode.replaceChild(clear,s);
     text.parentNode.replaceChild(goback, text);
     Initial.parentNode.replaceChild(reset,Initial);
-    
-    
     
     reset.addEventListener('click',function(){
      window.location.href='quiz.html';
