@@ -154,7 +154,7 @@ function getscore(){
     
     
     reset.addEventListener('click',function(){
-        getquestion();
+     window.location.href='quiz.html';
     });
     
     }
